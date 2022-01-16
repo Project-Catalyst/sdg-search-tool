@@ -4,6 +4,7 @@ import proposals from '@/assets/data/proposals.json'
 const getDefaultState = () => ({
   all: [],
   proposals: proposals,
+  version: '0.0.1',
   activeFilters: {
     proposal_id: [],
     challenge: [],
@@ -106,6 +107,11 @@ const mutations = {
       }
     }
   },
+  checkVersion(localState) {
+    if (state.version !== localState.version) {
+      Object.assign(localState, getDefaultState())
+    }
+  }
 }
 
 export default {

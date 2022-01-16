@@ -59,6 +59,9 @@ export default {
       })
       return challenges
     }
+  },
+  mounted() {
+    this.$store.commit('filters/checkVersion')
   }
 }
 </script>
