@@ -9,12 +9,13 @@ const getDefaultState = () => ({
     challenge: [],
     sdgs: [],
     related: false,
+    indirect_related: false,
     funded: false
   }
 })
 
 const filtersAsLists = ['proposal_id', 'challenge', 'sdgs']
-const filtersAsFlags = ['related', 'funded']
+const filtersAsFlags = ['related', 'indirect_related', 'funded']
 
 const state = getDefaultState()
 
@@ -44,7 +45,10 @@ const getters = {
       )
     }
     if (state.activeFilters.related) {
-      proposals = proposals.filter((el) => el.sdg_related === 'Yes')
+      proposals = proposals.filter((el) => el.sdg_related)
+    }
+    if (state.activeFilters.indirect_related) {
+      proposals = proposals.filter((el) => el.sdg_indirect_rel)
     }
     if (state.activeFilters.funded) {
       proposals = proposals.filter((el) => el.status)

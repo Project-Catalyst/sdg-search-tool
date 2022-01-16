@@ -15,7 +15,6 @@
           {{ proposal.author }}
         </p>
         <p>{{ proposal.description }}</p>
-        <p><b>Funds requested:</b> {{ proposal.requested_funds | currency}}</p>
         <div class="goals mb-4" v-if="proposal.goals.length > 0">
           <div class="heading">SDGs</div>
           <div class="goals-list columns is-multiline">
@@ -28,18 +27,17 @@
         </div>
         <div>
           <b>Proposal funded: {{funded}}</b><br />
-          <b>Proposal SDG related: {{proposal.sdg_related}}</b>
+          <b>Proposal SDG related: {{related}}</b><br />
+          <b>Proposal SDG indirect related: {{indirectRelated}}</b>
         </div>
       </div>
     </div>
     </router-link>
-    <funded-widget :proposal="proposal" />
   </div>
 </template>
 
 <script>
 
-import FundedWidget from '@/components/FundedWidget';
 
 export default {
   data() {
@@ -47,7 +45,6 @@ export default {
   },
   props: ['proposal', 'goalsById', 'challenges'],
   components: {
-    FundedWidget
   },
   computed: {
     funded() {
@@ -55,6 +52,12 @@ export default {
     },
     challenge() {
       return this.challenges[this.proposal.category]
+    },
+    related() {
+      return (this.proposal.sdg_related) ? 'YES' : 'NO'
+    },
+    indirectRelated() {
+      return (this.proposal.sdg_indirect_rel) ? 'YES' : 'NO'
     }
   }
 }

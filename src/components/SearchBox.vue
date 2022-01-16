@@ -2,7 +2,7 @@
   <section class="filter pt-4 pb-4">
     <div class="filter-list box columns is-multiline m-0 mb-4">
       <div
-        class="single-filter is-6 column"
+        class="single-filter is-4 column"
         v-for="(v, i) in availableFilters"
         :key="`filter-${v.key}-${i}`"
       >
@@ -34,8 +34,27 @@
         </b-field>
       </div>
       <div class="single-filter is-3 column">
-        <b-field label="Proposal SDG related?">
+        <b-field>
+          <template #label>
+            Proposal SDG related?
+            <b-tooltip type="is-dark" label="Proposal that have a direct impact objective related to SDGs" multilined>
+              <b-icon size="is-small" icon="help-circle-outline"></b-icon>
+            </b-tooltip>
+          </template>
           <b-checkbox v-model="related"
+            size="is-large">
+          </b-checkbox>
+        </b-field>
+      </div>
+      <div class="single-filter is-3 column">
+        <b-field>
+          <template #label>
+            Proposal indirect SDG related?
+            <b-tooltip type="is-dark" label="Proposal that have an impact related to SDGs even if not directly implied in the proposal" multilined>
+              <b-icon size="is-small" icon="help-circle-outline"></b-icon>
+            </b-tooltip>
+          </template>
+          <b-checkbox v-model="indirect_related"
             size="is-large">
           </b-checkbox>
         </b-field>
@@ -154,6 +173,18 @@ export default {
           prop: 'related',
           value: val,
           label: 'SDG Related?'
+        });
+      }
+    },
+    indirect_related: {
+      get() {
+        return this.activeFilters.indirect_related
+      },
+      set(val) {
+        this.$store.commit('filters/addFilter', {
+          prop: 'indirect_related',
+          value: val,
+          label: 'SDG Indirect Related?'
         });
       }
     },

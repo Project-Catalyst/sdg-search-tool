@@ -37,7 +37,6 @@
               <b>How does success look like?</b><br />
               {{ proposal.success }}
             </p>
-            <p class="mb-3"><b>Funds requested</b> {{ proposal.requested_funds | currency }}</p>
           </div>
         </div>
         <div class="buttons">
@@ -62,7 +61,8 @@
         </div>
         <div>
           <b>Proposal funded: {{funded}}</b><br />
-          <b>Proposal SDG related: {{proposal.sdg_related}}</b>
+          <b>Proposal SDG related: {{related}}</b><br />
+          <b>Proposal SDG indirect related: {{indirectRelated}}</b>
         </div>
       </div>
     </div>
@@ -90,6 +90,12 @@ export default {
     },
     funded() {
       return (this.proposal.status) ? 'YES' : 'NO'
+    },
+    related() {
+      return (this.proposal.sdg_related) ? 'YES' : 'NO'
+    },
+    indirectRelated() {
+      return (this.proposal.sdg_indirect_rel) ? 'YES' : 'NO'
     },
     challenge() {
       return this.challenges.find((el) => this.proposal.category == el.id)
