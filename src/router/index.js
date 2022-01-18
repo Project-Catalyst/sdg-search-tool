@@ -41,10 +41,8 @@ const router = new VueRouter({
   },
 })
 
-/*
 router.afterEach(() => {
   router.app.$mixpanel.track('view')
 })
-*/
 
 export default router
