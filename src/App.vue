@@ -44,6 +44,17 @@
 <script>
 export default {
   methods: {
+  },
+  mounted() {
+    if (window.localStorage) {
+      let oldKeys = ['sdg-tool-default']
+      oldKeys.forEach((k) => {
+        let oldKey = window.localStorage.getItem(k)
+        if (oldKey) {
+          window.localStorage.removeItem(k)
+        }
+      })
+    }
   }
 }
 </script>
